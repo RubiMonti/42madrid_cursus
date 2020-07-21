@@ -16,5 +16,18 @@
 
 # include <stdarg.h>
 # include <libft.h>
+# include <stdio.h>
 
+typedef struct s_printf
+{
+    short       f;
+    int         len;
+    int         min_length;
+    int         precision;
+    int         printed;
+    int         fd;
+    va_list     ap;
+    char        *format;
+    int         i;
+};
 #endif
