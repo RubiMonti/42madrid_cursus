@@ -1,11 +1,22 @@
 CC = gcc
+
 FLAGS = -Werror -Wextra -Wall
+
 NAME = libftprintf.a
-OBJS = *.o
+
+SRC = *.c \
+	ft_printf.h \
+	/libft/*.c \
+	/libft/libft.h \
+	/include/*.c \
+
+OBJS = $(SRC:.c=*.o)
+
 
 $(NAME):
-	$(CC) $(FLAGS) -c 
-
+	$(CC) $(FLAGS) -c $(OBJS)
+	ar rc $(NAME) *.o 
+	ranlib $(NAME)
 
 all: $(NAME)
 
@@ -16,6 +27,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-printf:	
-	$(CC) $(FLAGS) -c ft_printf.c

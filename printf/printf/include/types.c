@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmontill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,41 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
-#ifndef FT_PRINTF.H
-# define FT_LIBFT.H
-
-# include <stdarg.h>
-# include <libft.h>
-# include <stdio.h>
-
-typedef struct s_tab
+int		types(t_t *t)
 {
-	const char	*str
-	int			rv;
-	int			i;
-	int			precision;
-	int			width;
-	va_list		ap;
-	char		*cpy;
-	char		*trat;
-	char		*flagtype;
-	char		flag;
-	char		flag_aux;
-	char		*convertype;
-	char		conver[5];
-}				t_t;
+	t->i++;
+	convertype(t);
+	width(t);
+	precision(t);
+	flagtype(t);
+	printtype(t);
+	return (t->rv);
+}
 
-int				ft_printf(const char *str, ...);
-t_t				*init(t_t *t);
-t_t				*reinit(t_t *t);
-t_t				*printprintf(t_t *t);
+t_t		*printtype(t_t *t)
+{
+	char	ident;
 
-t_t				*chartype(t_t *t);
-t_t				*strtype(t_t *t);
-t_t				*inttype(t_t *t);
-t_t				*uninttype(t_t *t);
-t_t				*hextype(t_t *t);
-t_t				*ptrtype(t_t *t);
-
-#endif
+	ident = t->flag;
+	if (ident == 'd' || ident == 'i')
+		inttype(t);
+	else if (ident == 's')
+		strtype(t);
+	else if (ident == 'c')
+		chartype(t);
+	else if (ident == 'x' || ident == 'X')
+		hextype(t);
+	else if (ident == 'u')
+		uninttype(t);
+	else if (ident == 'p')
+		ptrtype(t);
+	else if (ident == '%')
+	{
+		t->flag = '%';
+		chartype(t);
+	}
+	return (t);
+}

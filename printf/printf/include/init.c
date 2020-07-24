@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmontill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,41 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
-#ifndef FT_PRINTF.H
-# define FT_LIBFT.H
-
-# include <stdarg.h>
-# include <libft.h>
-# include <stdio.h>
-
-typedef struct s_tab
+t_t	*init(t_t *t)
 {
-	const char	*str
-	int			rv;
-	int			i;
-	int			precision;
-	int			width;
-	va_list		ap;
-	char		*cpy;
-	char		*trat;
-	char		*flagtype;
-	char		flag;
-	char		flag_aux;
-	char		*convertype;
-	char		conver[5];
-}				t_t;
+	t->rv = 0;
+	t->i = 0;
+	t->pres = -1;
+	t->width = 0;
+	t->cpy = (char*)t->str;
+	t->trat = (char*)t->str;
+	t->flagtype = "cspdiuxX%";
+	t->convertype = "0-+ ";
+	t->flag = 'q';
+	t->conver[0] = 'a';
+	t->conver[1] = 'a';
+	t->conver[2] = 'a';
+	t->conver[3] = 'a';
+	t->conver[4] = 'a';
+	return (t);
+}
 
-int				ft_printf(const char *str, ...);
-t_t				*init(t_t *t);
-t_t				*reinit(t_t *t);
-t_t				*printprintf(t_t *t);
-
-t_t				*chartype(t_t *t);
-t_t				*strtype(t_t *t);
-t_t				*inttype(t_t *t);
-t_t				*uninttype(t_t *t);
-t_t				*hextype(t_t *t);
-t_t				*ptrtype(t_t *t);
-
-#endif
+t_t	*reinit(t_t *t)
+{
+	t->flag = 'q';
+	t->conver[0] = 'a';
+	t->conver[1] = 'a';
+	t->conver[2] = 'a';
+	t->conver[3] = 'a';
+	t->conver[4] = 'a';
+	t->flag_aux = '\0';
+	t->width = 0;
+	t->pres = -1;
+	return (t);
+}
